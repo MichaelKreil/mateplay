@@ -1,0 +1,1 @@
+ffmpeg -re -i $1 -f rawvideo -vcodec rawvideo -pix_fmt rgb24 - > /dev/udp/matelight.cbrp3.c-base.org/1337
