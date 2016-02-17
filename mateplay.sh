@@ -1,3 +1,5 @@
+#!/bin/bash
+
 echo "streaming '$1' to matelight. quit with ctrl-c."
 while [ 1 ]
 do
