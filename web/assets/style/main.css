@@ -1,0 +1,60 @@
+html, body {
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	background: #000;
+	color: #ddd;
+	font-family: 'Trebuchet MS', Trebuchet, Verdana;
+}
+
+#videos {
+	margin-top: 40vh;
+	margin-top: calc(50vh-64px);
+	margin-bottom: 40vh;
+	margin-bottom: calc(50vh-64px);
+	text-align: center;
+}
+
+.video {
+	width: 320px;
+	height: 140px;
+	position: relative;
+	display: block;
+	margin: 0px auto 40px;
+	opacity: 0.3;
+	transition: opacity 0.2s;
+}
+	.video.active {
+		opacity: 1;
+	}
+	
+	.video .title {
+		position: absolute;
+		left: 0px;
+		right: 0px;
+		top: 128px;
+		text-align: center;
+		font-size: 12px;
+	}
+
+	.video .preview {
+		position: absolute;
+		top: 0px;
+		left: 0px;
+		right: 0px;
+		height: 126px;
+		background-size: 320px 12288px;
+		background-position: 0px 0px;
+		background-repeat: no-repeat;
+		image-rendering: pixelated;
+		cursor: pointer;
+	}
+
+@media (min-width: 700px) {
+	.video {
+		display: inline-block;
+		margin: 20px 20px;
+	}
+}
