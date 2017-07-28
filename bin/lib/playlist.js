@@ -3,6 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const Video = require('./video.js');
+const player = require('./player.js')();
 
 const videoFolder = path.resolve(__dirname, '../../videos');
 
@@ -25,7 +26,7 @@ function Playlist() {
 				console.warn('unknown file type "'+ext+'"');
 				return false;
 		}
-		var video = new Video(filename);
+		var video = new Video(filename, player);
 
 		if (!video.hasThumbnail()) todos.push(video.generateThumbnail);
 

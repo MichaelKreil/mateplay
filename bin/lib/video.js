@@ -3,11 +3,10 @@
 const fs = require('fs');
 const path = require('path');
 const child_process = require('child_process');
-const player = require('./player.js')();
 
 var thumbFolder = path.resolve(__dirname, '../../web/assets/thumbs');
 
-function Video(filename) {
+function Video(filename, player) {
 	var me = this;
 
 	var name = path.basename(filename);
