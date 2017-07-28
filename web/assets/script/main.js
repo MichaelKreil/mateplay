@@ -75,7 +75,7 @@ $(function () {
 	}, 80)
 
 	function play(video) {
-		$.getJSON('/api/playvideo/'+video.title, function (response) {
+		$.getJSON('/api/play/'+video.title, function (response) {
 			console.log(response);
 		})
 	}

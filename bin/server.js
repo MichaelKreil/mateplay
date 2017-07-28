@@ -14,13 +14,13 @@ app.get('/api/getvideos', (req, res) =>
 	))
 )
 
-app.get('/api/playvideo/:name', (req, res) =>
+app.get('/api/play/:name', (req, res) =>
 	playlist.getVideo(req.params.name).play(result =>
 		res.status(200).json(result)
 	)
 )
 
-app.get('/api/stopvideo', (req, res) =>
+app.get('/api/stop', (req, res) =>
 	playlist.stop(result =>
 		res.status(200).json(result)
 	)
