@@ -42,6 +42,7 @@ function Playlist() {
 	}
 
 	return {
+		stop:
 		getVideos:videos,
 		getVideo:name => titleLookup.get(name)
 	}

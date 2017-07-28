@@ -20,7 +20,11 @@ app.get('/api/playvideo/:name', (req, res) =>
 	)
 )
 
-})
+app.get('/api/stopvideo', (req, res) =>
+	playlist.stop(result =>
+		res.status(200).json(result)
+	)
+)
 
 app.listen(8080, err => {
 	if (err) throw err;
