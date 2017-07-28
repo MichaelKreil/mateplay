@@ -4,25 +4,59 @@ html, body {
 }
 
 body {
-	background: #000;
+	background: #1c1c1c;
 	color: #ddd;
 	font-family: 'Trebuchet MS', Trebuchet, Verdana;
+	
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
+#header {
+	margin-top: 100px;
+	text-align: center;
+}
+
+	#header h1 {
+		text-align: center;
+		font-weight: normal;
+	}
+	#header #btnStop {
+		font-size: 14px;
+		margin-top: 100px;
+	}
+
+		#header #btnStop span {
+			display: inline-block;
+			width: 16px;
+			height: 16px;
+			background-color: #aaa;
+			margin-right: 3px;
+			vertical-align: -3; 
+			transition: background-color 0.1s, box-shadow 0.1s;
+		}
+
+			#header #btnStop:hover span {
+				background-color: #fff;
+				box-shadow: 0 0 10px rgba(255,255,255,0.2);
+			}
+
 #videos {
-	margin-top: 40vh;
-	margin-top: calc(50vh-64px);
-	margin-bottom: 40vh;
-	margin-bottom: calc(50vh-64px);
+	margin-top: 100px;
+	margin-bottom: 200px;
 	text-align: center;
 }
 
 .video {
+	display: inline-block;
+	margin: 20px 20px;
 	width: 320px;
 	height: 140px;
 	position: relative;
-	display: block;
-	margin: 0px auto 40px;
 	opacity: 0.3;
 	transition: opacity 0.2s;
 }
@@ -52,9 +86,39 @@ body {
 		cursor: pointer;
 	}
 
-@media (min-width: 700px) {
-	.video {
-		display: inline-block;
-		margin: 20px 20px;
+@media (max-width: 700px) {
+	#videos {
+		margin-bottom: 40vh;
 	}
+		.video {
+			display: block;
+			margin: 0px auto 40px;
+		}
+}
+
+.button {
+	align-items: flex-start;
+	background: rgba(0,0,0,0.1);
+	border-radius: 5px;
+	border: 1px solid #141414;
+	box-shadow: 0 2px 0px rgba(255,255,255,0.1) inset, 0 0px 2px rgba(0,0,0,0.7);
+	box-sizing: border-box;
+	color: #aaa;
+	cursor: pointer;
+	display: inline-block;
+	font-weight: normal;
+	margin-right: 10px;
+	outline: none;
+	padding: 15px;
+	text-align: center;
+	text-decoration: none;
+	transition: color 0.1s;
+}
+
+.button:hover {
+	color: #ccc;
+}
+
+.button:active, .button:focus {
+	box-shadow: 0 0 0 transparent inset;
 }
