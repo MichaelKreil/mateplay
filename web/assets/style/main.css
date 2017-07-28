@@ -25,12 +25,12 @@ body {
 		text-align: center;
 		font-weight: normal;
 	}
-	#header #btnStop {
+	#header #stopButton {
 		font-size: 14px;
 		margin-top: 100px;
 	}
 
-		#header #btnStop span {
+		#header #stopButton span {
 			display: inline-block;
 			width: 16px;
 			height: 16px;
@@ -40,7 +40,7 @@ body {
 			transition: background-color 100ms, box-shadow 100ms;
 		}
 
-			#header #btnStop:hover span {
+			#header #stopButton:hover span {
 				background-color: #fff;
 				box-shadow: 0 0 10px rgba(255,255,255,0.2);
 			}
@@ -123,6 +123,9 @@ body {
 		box-shadow: 0 0 0 transparent inset;
 	}
 
+.playButton {
+	pointer-events: none;
+}
 .playButton svg {
 	box-sizing: border-box;
 	width: 100%;

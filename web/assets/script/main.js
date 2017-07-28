@@ -11,6 +11,10 @@ $(function () {
 
 	$(window).scroll(checkHover);
 
+	$('#stopButton').click(function () {
+		$.getJSON('/api/stop', function () {})
+	})
+
 	$.getJSON('/api/getvideos', function (data) {
 		videos = data;
 		console.log(videos);
