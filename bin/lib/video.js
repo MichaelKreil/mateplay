@@ -29,7 +29,7 @@ function Video(filename, player) {
 
 	me.play = cb =>
 		player.stop(() =>
-			player.play(filename, () => cb())
+			player.playLoop(filename, () => cb())
 		)
 	
 	me.generateThumbnail = cb =>
@@ -41,8 +41,6 @@ function Video(filename, player) {
 		)
 	return me;
 }
-
-
 
 module.exports = Video;
 
