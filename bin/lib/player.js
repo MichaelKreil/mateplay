@@ -13,17 +13,17 @@ function Player() {
 	var playProcess = false;
 	var nextTask = false;
 
-	function stop(cb) {
-		console.log('stop');
-		if (!playProcess) return cb();
+	function stopVideo() {
+		if (!playProcess) return;
 
-		nextTask = false;
+		playProcess.removeAllListeners('exit');
+		playProcess.stdout.removeAllListeners('data');
 		playProcess.kill();
+		playProcess = false;
 	}
 
-	function play(filename) {
-		console.log('play once "'+filename+'"');
-		if (playProcess) throw Error();
+	function playVideo(filename) {
+		if (playProcess) stopVideo();
 
 		playProcess = child_process.spawn('ffmpeg', [
 			'-loglevel','error',
@@ -32,8 +32,8 @@ function Player() {
 			'-f','rawvideo',
 			'-vcodec','rawvideo',
 			'-pix_fmt','rgb24',
-			'-']
-		)
+			'-'
+		])
 
 		playProcess.stdout.on('data', sendFrame);
 		playProcess.stderr.on('data', chunk => console.error(chunk.toString()));
@@ -43,25 +43,25 @@ function Player() {
 		});
 	}
 
-	function playOnce(filename) {
-		if (playProcess) stop();
-		nextTask = false;
-		play(filename);
-	}
-
-	function playLoop(filename, cb) {
-		if (playProcess) stop();
-		nextTask = () => play(filename);
-		nextTask();
-	}
-
 	function sendFrame(chunk) {
 		socket.send(chunk, config.matePort, config.mateHost);
 	}
 
 	return {
-		stop:stop,
-		playOnce:playOnce,
-		playLoop:playLoop
+		stop:() => {
+			console.log('stop');
+			nextTask = false;
+			stopVideo();
+		},
+		playOnce:(filename) => {
+			console.log('play once "'+filename+'"');
+			nextTask = false;
+			playVideo(filename);
+		},
+		playLoop:(filename) => {
+			console.log('play loop "'+filename+'"');
+			nextTask = () => playVideo(filename);
+			nextTask();
+		}
 	}
 }

@@ -28,9 +28,7 @@ function Video(filename, player) {
 	})
 
 	me.play = cb =>
-		player.stop(() =>
-			player.playLoop(filename, () => cb())
-		)
+		player.playLoop(filename)
 	
 	me.generateThumbnail = cb =>
 		getFrameCount(filename, n =>
