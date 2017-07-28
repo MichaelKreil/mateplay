@@ -2,26 +2,27 @@
 
 const child_process = require('child_process');
 const dgram = require('dgram');
-const socket = dgram.createSocket('udp4');
+const config = require('../config.js');
 
 module.exports = Player;
 
+
 function Player() {
+
+	const socket = dgram.createSocket('udp4');
 	var playProcess = false;
+	var nextTask = false;
 
 	function stop(cb) {
 		console.log('stop');
 		if (!playProcess) return cb();
 
-		playProcess.on('exit', () => {
-			playProcess = false;
-			cb();
-		});
+		nextTask = false;
 		playProcess.kill();
 	}
 
-	function play(filename, cb) {
-		console.log('play "'+filename+'"');
+	function play(filename) {
+		console.log('play once "'+filename+'"');
 		if (playProcess) throw Error();
 
 		playProcess = child_process.spawn('ffmpeg', [
@@ -34,13 +35,24 @@ function Player() {
 			'-']
 		)
 
-		//'>','/dev/udp/matelight.cbrp3.c-base.org/1337'
-		playProcess.stdout.on('data', chunk => {
-			socket.send(chunk, 1337, 'matelight.cbrp3.c-base.org');
-			//console.log(chunk.toString())
-		});
+		playProcess.stdout.on('data', sendFrame);
 		playProcess.stderr.on('data', chunk => console.error(chunk.toString()));
-		cb();
+		playProcess.on('exit', () => {
+			playProcess = false;
+			if (nextTask) nextTask();
+		});
+	}
+
+	function playOnce(filename) {
+		if (playProcess) stop();
+		nextTask = false;
+		play(filename);
+	}
+
+	function playLoop(filename, cb) {
+		if (playProcess) stop();
+		nextTask = () => play(filename);
+		nextTask();
 	}
 
 	function sendFrame(chunk) {
@@ -49,6 +61,7 @@ function Player() {
 
 	return {
 		stop:stop,
-		play:play
+		playOnce:playOnce,
+		playLoop:playLoop
 	}
 }

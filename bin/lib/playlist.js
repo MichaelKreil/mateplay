@@ -42,8 +42,8 @@ function Playlist() {
 	}
 
 	return {
-		stop:
-		getVideos:videos,
+		stop:() => player.stop(),
+		getVideos:() => videos,
 		getVideo:name => titleLookup.get(name)
 	}
 

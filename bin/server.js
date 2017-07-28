@@ -9,22 +9,18 @@ const app = express();
 
 app.use('/', express.static(path.resolve(__dirname, '../web')));
 app.get('/api/getvideos', (req, res) =>
-	res.status(200).json(playlist.getVideos.map(v =>
-		v.toJSON()
-	))
+	res.status(200).json(playlist.getVideos().map(v => v.toJSON()))
 )
 
-app.get('/api/play/:name', (req, res) =>
-	playlist.getVideo(req.params.name).play(result =>
-		res.status(200).json(result)
-	)
-)
+app.get('/api/play/:name', (req, res) => {
+	playlist.getVideo(req.params.name).play()
+	res.status(200).json(true)
+})
 
-app.get('/api/stop', (req, res) =>
-	playlist.stop(result =>
-		res.status(200).json(result)
-	)
-)
+app.get('/api/stop', (req, res) => {
+	playlist.stop();
+	res.status(200).json(true)
+})
 
 app.listen(8080, err => {
 	if (err) throw err;
