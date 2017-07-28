@@ -43,6 +43,10 @@ function Player() {
 		cb();
 	}
 
+	function sendFrame(chunk) {
+		socket.send(chunk, config.matePort, config.mateHost);
+	}
+
 	return {
 		stop:stop,
 		play:play
