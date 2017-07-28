@@ -43,7 +43,7 @@ function Playlist() {
 
 	return {
 		getVideos:videos,
-		getVideo:(name) => titleLookup.get(name)
+		getVideo:name => titleLookup.get(name)
 	}
 
 }

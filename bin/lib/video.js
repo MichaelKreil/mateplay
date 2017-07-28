@@ -27,22 +27,18 @@ function Video(filename, player) {
 		title: title
 	})
 
-	me.play = (cb) => {
-		player.stop(() => {
-			player.play(filename,() => {
-				cb()
-			})
-		})
-	}
+	me.play = cb =>
+		player.stop(() =>
+			player.play(filename, () => cb())
+		)
 	
-	me.generateThumbnail = (cb) => {
-		getFrameCount(filename, (n) => {
+	me.generateThumbnail = cb =>
+		getFrameCount(filename, n =>
 			generateStrip(filename, thumbnailFilename, Math.floor(n/8), () => {
 				hasThumbnail = true;
 				cb()
 			})
-		})
-	}
+		)
 	return me;
 }
 
@@ -61,13 +57,9 @@ function getFrameCount(filename, cb) {
 		'-of','default=nokey=1:noprint_wrappers=1',
 		filename
 	])
-	p.stdout.on('data', chunk => {
-		result += chunk.toString()
-	});
+	p.stdout.on('data', chunk => result += chunk.toString());
 	p.stderr.on('data', chunk => console.error(chunk.toString()));
-	p.on('exit', () => {
-		cb(parseFloat(result));
-	});
+	p.on('exit', () => cb(parseFloat(result)));
 }
 
 function generateStrip(filename, thumbfile, everyFrame, cb) {
@@ -84,7 +76,5 @@ function generateStrip(filename, thumbfile, everyFrame, cb) {
 		thumbfile
 	])
 	p.stderr.on('data', chunk => console.error(chunk.toString()));
-	p.on('exit', () => {
-		cb();
-	});
+	p.on('exit', () => cb());
 }
