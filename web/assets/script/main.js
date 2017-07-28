@@ -19,7 +19,9 @@ $(function () {
 		videos.forEach(function (video) {
 			var node = $([
 				'<div class="video">',
-					'<div class="preview" style="background-image:url(\'/assets/thumbs/'+video.thumbnailName+'\')"></div>',
+					'<div class="preview" style="background-image:url(\'/assets/thumbs/'+video.thumbnailName+'\')">',
+						'<div class="playButton"></div>',
+					'</div>',
 					'<div class="title">'+video.title+'</div>',
 				'</div>'
 			].join(''));
@@ -36,6 +38,8 @@ $(function () {
 			video.node = node;
 			video.preview = node.find('.preview');
 			video.offset = 0;
+
+			node.find('.playButton').get(0).insertAdjacentHTML('beforeend','<svg viewBox="0 0 200 200"><circle cx="100" cy="100" r="90" fill="#000" stroke-width="15" stroke="#fff"/><polygon points="70,55 70,145 145,100" fill="#fff"/></svg>');
 		})
 		checkHover();
 	})
