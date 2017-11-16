@@ -1,0 +1,21 @@
+version: '3'
+services:
+  matehost:
+    image: matelight
+    container_name: matehost
+    ports:
+      - '1337:1337/udp'
+      - '1337:1337'
+    devices:
+      - '/dev/bus/usb/:/dev/bus/usb/'      
+    security_opt:
+      - 'seccomp:unconfined'
+  openmct:
+    image: mateplay
+    container_name: mateplay
+    environment:
+      CRAP_HOST: matehost
+    ports:
+      - '8080:8080'
+    links:
+      - matehost
