@@ -1,4 +1,4 @@
 module.exports = {
-	mateHost: 'matelight.cbrp3.c-base.org',
+	mateHost: process.env.CRAP_HOST,
 	matePort: 1337
 }
