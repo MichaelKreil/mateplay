@@ -10,7 +10,7 @@ services:
       - '/dev/bus/usb/:/dev/bus/usb/'      
     security_opt:
       - 'seccomp:unconfined'
-  openmct:
+  mateplay:
     image: mateplay
     container_name: mateplay
     environment:
