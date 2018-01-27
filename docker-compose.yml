@@ -5,7 +5,7 @@ services:
     container_name: matehost
     ports:
       - '1337:1337/udp'
-      - '1337:1337'
+      - '1337:1337/tcp'
     devices:
       - '/dev/bus/usb/:/dev/bus/usb/'      
     security_opt:
@@ -16,6 +16,6 @@ services:
     environment:
       CRAP_HOST: matehost
     ports:
-      - '8080:8080'
+      - '80:8080'
     links:
       - matehost
